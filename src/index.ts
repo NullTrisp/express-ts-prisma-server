@@ -5,7 +5,7 @@ import { userRouter } from './routes';
 const app = express();
 app.use(express.json());
 
-app.use("/example", userRouter)
+app.use("/user", userRouter)
 
 app.listen(PORT, () => {
     console.log(`
