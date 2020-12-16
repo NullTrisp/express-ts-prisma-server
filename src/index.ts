@@ -1,11 +1,11 @@
 import express from 'express';
 import { PORT } from './config/constants';
-import { exampleRouter } from './routes';
+import { userRouter } from './routes';
 
 const app = express();
 app.use(express.json());
 
-app.use("/example", exampleRouter)
+app.use("/example", userRouter)
 
 app.listen(PORT, () => {
     console.log(`

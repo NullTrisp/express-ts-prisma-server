@@ -1,7 +1,7 @@
-import { ExampleController } from './Example/Example';
+import { UserController } from './user/user';
 
-const exampleController = new ExampleController();
+const userController = new UserController();
 
 export {
-    exampleController
+    userController
 };
