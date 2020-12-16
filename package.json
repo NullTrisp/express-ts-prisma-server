@@ -1,0 +1,31 @@
+{
+  "name": "ts_basic_server",
+  "version": "1.0.0",
+  "description": "* dist (Here the compiled javascript code will go)\r * src (Here you will have your typescript code)\r     * classes (Here you can add abstract classes or interfaces)\r         * CrudController.ts\r     * config (Here you can add config files)\r         * constants.ts\r     * controllers (Here you can add your controllers)\r         * index.ts\r     * routes (Here all the project routes will go)\r         * index.ts\r     * index.ts (Here the server is lifted)",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon dist/index.js",
+    "build:dev": "tsc --watch --preserveWatchOutput",
+    "dev": "concurrently \"npm:build:dev\" \"npm:start:dev\""
+  },
+  "keywords": [],
+  "author": "Nicolás Calvache Jimenez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.9",
+    "@types/node": "^14.14.14",
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NullTrisp/express-ts-basic-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NullTrisp/express-ts-basic-server/issues"
+  },
+  "homepage": "https://github.com/NullTrisp/express-ts-basic-server#readme"
+}
