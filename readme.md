@@ -38,7 +38,7 @@
 Prisma lets you modify the db tables in the schema.prisma file, additionally, it allows to modify the db tables directly in the db then update your schema.prisma models
 
 * Updating models
-    - af
+    - [Syntax]()
 
 * Updating directly in the db
 
