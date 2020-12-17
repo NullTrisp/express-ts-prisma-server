@@ -1,86 +1,79 @@
-import { user } from '@prisma/client';
-import { Request, response, Response } from 'express';
+import { Request, Response } from 'express';
 import { CrudController } from '../../classes/CrudController';
-import { prisma } from '../../config/constants';
+import { PRISMA } from '../../config/constants';
 
 export class UserController extends CrudController {
     public create(req: Request<import("express-serve-static-core").ParamsDictionary>, res: Response): void {
-        this.createUser(req.body).then(response => {
+        PRISMA.user.create({
+            data: {
+                name: req.body.name,
+                email: req.body.email,
+            }
+        }).then(_response => {
             res.sendStatus(201);
         }).catch(err => {
-            throw err;
+            res.status(500).send(err);
         }).finally(async () => {
-            await prisma.$disconnect()
+            await PRISMA.$disconnect()
         })
     }
 
-    private async createUser(data: any): Promise<user> {
-        return await prisma.user.create({
-            data: {
-                name: data.name,
-                email: data.email,
-            }
-        })
-    }
-
-    public read(req: Request<import("express-serve-static-core").ParamsDictionary>, res: Response): void {
-        this.getAll().then(response => {
+    public read(_req: Request<import("express-serve-static-core").ParamsDictionary>, res: Response): void {
+        PRISMA.user.findMany().then(response => {
             res.status(200).send(response);
-        }).catch(e => {
-            throw e;
+        }).catch(err => {
+            res.status(500).send(err);
         }).finally(async () => {
-            await prisma.$disconnect();
+            await PRISMA.$disconnect();
         })
     }
 
-    private async getAll(): Promise<Array<user>> {
-        return await prisma.user.findMany();
-    }
-
-    readOne(req: Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs>, res: Response<any>) {
-        this.getOne(Number(req.params.userid)).then(response => {
+    public readOne(req: Request<import("express-serve-static-core").ParamsDictionary>, res: Response<any>) {
+        PRISMA.user.findUnique({
+            where: {
+                id: Number(req.params.userid),
+            }
+        }).then(response => {
             if (response !== null) {
                 res.status(200).send(response);
             } else {
                 res.status(404).send("user not found");
             }
         }).catch(err => {
-            throw err;
+            res.status(500).send(err);
         }).finally(async () => {
-            await prisma.$disconnect();
-        })
-    }
-
-    private async getOne(userid: number): Promise<user | null> {
-        return await prisma.user.findUnique({
-            where: {
-                id: userid
-            }
+            await PRISMA.$disconnect();
         })
     }
 
     public update(req: Request<import("express-serve-static-core").ParamsDictionary>, res: Response): void {
-        this.updateOne(Number(req.params.userid), req.body.name).then(response => {
-            res.status(200).send(response);
-        }).catch(err => {
-            throw err;
-        }).finally(async () => {
-            await prisma.$disconnect();
-        })
-    }
-
-    private async updateOne(userid: number, newName: string): Promise<user> {
-        return await prisma.user.update({
+        PRISMA.user.update({
             where: {
-                id: userid,
+                id: Number(req.params.userid),
             },
             data: {
-                name: newName,
+                name: req.body.name,
             },
+        }).then(response => {
+            res.status(200).send(response);
+        }).catch(err => {
+            res.status(500).send(err);
+        }).finally(async () => {
+            await PRISMA.$disconnect();
         })
     }
 
     public delete(req: Request<import("express-serve-static-core").ParamsDictionary>, res: Response): void {
-        throw new Error("Method not implemented.");
+        PRISMA.user.delete({
+            where: {
+                id: Number(req.params.userid),
+            }
+        }).then(response => {
+            res.status(200).send(response);
+        }).catch(err => {
+            res.status(500).send(err);
+        }).finally(async () => {
+            await PRISMA.$disconnect();
+        })
     }
 }
