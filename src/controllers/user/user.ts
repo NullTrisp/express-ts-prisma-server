@@ -1,6 +1,7 @@
-import { Request, Response } from 'express';
+import { Request, response, Response } from 'express';
 import { CrudController } from '../../classes/CrudController';
 import { PRISMA } from '../../config/constants';
+import { generateAccessToken } from '../../config/jwt/services';
 
 export class UserController extends CrudController {
     public create(req: Request<import("express-serve-static-core").ParamsDictionary>, res: Response): void {
@@ -15,6 +16,23 @@ export class UserController extends CrudController {
             res.status(500).send(err);
         }).finally(async () => {
             await PRISMA.$disconnect()
+        })
+    }
+
+    public login(req: Request<import("express-serve-static-core").ParamsDictionary>, res: Response): void {
+        PRISMA.user.findUnique({
+            where: {
+                email: <string>req.body.email,
+            }
+        }).then(response => {
+            if (response !== null) {
+                res.json(generateAccessToken({ email: response.email }));
+            } else {
+                res.status(400).send("Credentials not found");
+            }
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err);
         })
     }
 
@@ -49,7 +67,7 @@ export class UserController extends CrudController {
     public update(req: Request<import("express-serve-static-core").ParamsDictionary>, res: Response): void {
         PRISMA.user.update({
             where: {
-                id: Number(req.params.userid),
+                email: <string>req.body.name,
             },
             data: {
                 name: req.body.name,
@@ -66,7 +84,7 @@ export class UserController extends CrudController {
     public delete(req: Request<import("express-serve-static-core").ParamsDictionary>, res: Response): void {
         PRISMA.user.delete({
             where: {
-                id: Number(req.params.userid),
+                email: <string>req.body.email,
             }
         }).then(response => {
             res.status(200).send(response);
