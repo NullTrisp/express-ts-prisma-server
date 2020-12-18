@@ -1,4 +1,4 @@
-import { Request, response, Response } from 'express';
+import { Request, Response } from 'express';
 import { CrudController } from '../../classes/CrudController';
 import { PRISMA } from '../../config/constants';
 import { generateAccessToken } from '../../config/jwt/services';
