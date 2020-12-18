@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 export const PORT = process.env.PORT || 4000;   // server port
-export const HOST: string = process.env.HOST || "http://localhost";   // server port
+export const HOST: string = process.env.HOST || "http://localhost";   // server host
 export const PRISMA = new PrismaClient();   // prisma client instance
 export const ORIGINS: string[] = ['http://localhost:8080']; //  cors allowed origins
 export const CORSMSG = 'The CORS policy for this site does not allow access from the specified Origin.';
