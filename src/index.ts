@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { CORSMSG, HOST, ORIGINS, PORT } from './config/constants';
+import { CORSMSG, DATABASE, HOST, ORIGINS, PORT } from './config/constants';
 import { userRouter } from './routes';
 
 class Server {
@@ -38,8 +38,8 @@ class Server {
      ▄▄▄▄▄█ █   █▄▄▄█   █  █ ██     ██   █▄▄▄█   █  █ █     █   █▄▄▄▄▄█ █     █       █   █       ▄▄ 
     █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄█  █▄█ █▄▄▄█ █▄▄▄▄▄▄▄█▄▄▄█  █▄█     █▄▄▄█▄▄▄▄▄▄▄█     █▄▄▄▄▄▄▄█▄▄▄█      █▄▄█`);
             console.log(``);
-            console.log(`   connected to ${process.env.DATABASE}`);
-            console.log(`   your url is: ${HOST + PORT}`);
+            console.log(`   connected to ${DATABASE}`);
+            console.log(`   your url is: ${HOST}:${PORT}`);
         });
     }
 }
