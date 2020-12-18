@@ -38,7 +38,7 @@ This is the basic structure of a Express project using Typescript, Prisma (with 
 
 DATABASE = "database_name"  
 DATABASE_URL="mysql://user:password@host:port/db_name"  
-TOKEN_SECRET="very-large-string"
+TOKEN_SECRET="very-large-string"  
 HOST="yourhost"
 
 ## Prisma
