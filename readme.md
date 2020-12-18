@@ -30,7 +30,7 @@ This is the basic structure of a Express project using Typescript, Prisma (with 
 
 1. Run `npm install` in the project dir
 2. create a .env file (Read ".env File")
-3. Run `npx prisma db push --preview-feature`
+3. Run `npx prisma db push --preview-feature` (needs test)
 
 ## .env File
 
@@ -43,8 +43,12 @@ This is the basic structure of a Express project using Typescript, Prisma (with 
 Prisma lets you modify the db tables in the schema.prisma file, additionally, it allows to modify the db tables directly in the db then update your schema.prisma models
 
 * Updating models
-    - [Syntax]()
+    - [Syntax](https://www.prisma.io/docs/concepts/components/prisma-schema/data-model)
+    - When modifying the prisma.schema models, run the command `prisma migrate dev --preview-feature`
 
 * Updating directly in the db
+    - When applying changes directly to the db run the command `npx prisma introspect`
+
+#### The routes usage can be found [here](https://documenter.getpostman.com/view/11378661/TVssinme)
 
 ##### Information adapted from [medium(ts-server)](https://medium.com/better-programming/create-an-express-server-using-typescript-dec8a51e7f8d), [medium(CORS)](https://medium.com/zero-equals-false/using-cors-in-express-cac7e29b005b), [express](http://expressjs.com/), [prisma](https://www.prisma.io/) and [DigitalOcean(jwt)](https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs)
